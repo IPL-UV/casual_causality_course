@@ -9,7 +9,7 @@ internal course on causal methods at ISP.
 ### Week 1, Introduction and Fundamentals
 
 Tue 02/05 10:30 - 13:00 [GV]
-[Introduction to causal questions, methods and problems](material/week1/session1/README.md)
+[Introduction to causal questions, methods and problems](material/week1/session1/)
 
 Thur 04/05 10:30 - 13:00 [ED] 
 Structural Causal Models (SCMs)
