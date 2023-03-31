@@ -9,35 +9,11 @@ internal course on causal methods at ISP.
 
 ### Schedule
 
-### Week 1, Introduction and Fundamentals
-
-- Tue 02/05 10:30 - 13:00 [GV]
-  [Introduction to causal questions, methods and problems](material/lesson01/)
-
-  [pdf](material/lesson01/lesson01.pdf) 
-  [code](material/lesson01/code)
-
-- Thur 04/05 10:30 - 13:00 [ED] 
-  Structural Causal Models (SCMs)
-  Graphical Models
-  Interventions and counterfactuals
-  Potential outcomes framework
-
-### Week 2 
-
-  |  Date                  |     Title          |           |
-  |------------------------|--------------------|-----------|
-  |Tue 09/05 10:30 - 13:00 |   Causal discovery |     [GV]  |
-  |Thur 04/05 10:30 - 13:00|                    |     [ED]  | 
-
-- 
-### Week 3
-
-- Tue 09/05 10:30 - 13:00 [GV]
-- Thur 04/05 10:30 - 13:00 [ED] 
-
-### Week 4
-
-- Tue 09/05 10:30 - 13:00 [GV]
-- Thur 04/05 10:30 - 13:00 [ED] 
- 
+  |week 1|Tue 02/05  | 10:30  13:00 |  Introduction               |GV|
+  |      |Thur 04/05 | 10:30 13:00  |  Notation and fundamentals  |ED| 
+  |week 2|Tue 09/05  | 10:30  13:00 |  Causal discovery           |GV|
+  |      |Thur 11/05 | 10:30 13:00  |  Continous optimization     |ED| 
+  |week 3|Tue 16/05  | 10:30  13:00 |                             |GV|
+  |      |Thur 18/05 | 10:30 13:00  |                             |ED| 
+  |week 4|Tue 23/05  | 10:30  13:00 |                             |GV|
+  |      |Thur 25/05 | 10:30 13:00  |                             |ED| 
