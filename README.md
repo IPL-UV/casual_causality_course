@@ -9,6 +9,8 @@ internal course on causal methods at ISP.
 
 ### Schedule
 
+
+|      |           |              |                             |    |
 |------|-----------|--------------|-----------------------------|----|
 |week 1|Tue 02/05  | 10:30  13:00 |  Introduction               |GV  |
 |      |Thur 04/05 | 10:30 13:00  |  Notation and fundamentals  |ED  | 
