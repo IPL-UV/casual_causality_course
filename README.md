@@ -25,11 +25,12 @@ internal course on causal methods at ISP.
 
 ### Week 2 
 
-- Tue 09/05 10:30 - 13:00 [GV]
-  Causal discovery, constrained-based methods (PC) and score-based methods (GES)  
+  |  Date                  |     Title          |           |
+  |------------------------|--------------------|-----------|
+  |Tue 09/05 10:30 - 13:00 |   Causal discovery |     [GV]  |
+  |Thur 04/05 10:30 - 13:00|                    |     [ED]  | 
 
-- Thur 04/05 10:30 - 13:00 [ED] 
-
+- 
 ### Week 3
 
 - Tue 09/05 10:30 - 13:00 [GV]
