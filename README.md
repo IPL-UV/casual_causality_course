@@ -13,7 +13,7 @@ internal course on causal methods at ISP.
 |      |           |              |                             |    |
 |------|-----------|--------------|-----------------------------|----|
 |week 1|Tue 02/05  | 10:30  13:00 |  Introduction               |GV  |
-|      |Thur 04/05 | 10:30 13:00  |  Notation and fundamentals  |ED  | 
+|      |Thur 04/05 | 10:30 13:00  |  Notation and fundamentals  |GV | 
 |week 2|Tue 09/05  | 10:30  13:00 |  Causal discovery           |GV  |
 |      |Thur 11/05 | 10:30 13:00  |  Continous optimization     |ED  | 
 |week 3|Tue 16/05  | 10:30  13:00 |                             |GV  |
