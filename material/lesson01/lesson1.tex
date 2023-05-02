@@ -1,0 +1,330 @@
+\documentclass{beamer}
+
+\usepackage{tikz}
+%\usetheme{boxes}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+\bibliographystyle{plainnat}
+\usecolortheme{crane}
+
+\definecolor{orange}{RGB}{232, 86, 15}
+\definecolor{blue}{RGB}{14, 159, 232}
+\definecolor{blueblue}{RGB}{50, 90, 160}
+\definecolor{yellow}{RGB}{232, 187, 14} 
+\definecolor{red}{RGB}{232, 14, 59}
+\newtheorem{deff}{Definición}
+%Information to be included in the title page:
+\institute[]{}
+
+\setbeamercolor{title}{bg=blueblue, fg=white}
+\setbeamercolor{subttile}{bg=blueblue, fg=white}
+\setbeamercolor{frametitle}{bg=blueblue, fg=white}
+\setbeamercolor{block title}{bg=blue, fg=white}
+\setbeamercolor{block title alerted}{bg=red, fg=white}
+\setbeamercolor{block title example}{bg=yellow, fg=white}
+\setbeamercolor{footline}{bg=gray, fg=white}
+\beamertemplatenavigationsymbolsempty
+
+	
+\newcommand{\indep}{\perp \!\!\! \perp}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+
+\newcommand\overalert[2]{
+	 \only<#1>{
+\begin{textblock*}{\textwidth}(.35\textwidth,0.25\textheight)
+    \begin{beamercolorbox}[wd=.5\textwidth,center,sep=0.3cm]{block title alerted}
+	    #2
+    \end{beamercolorbox}
+\end{textblock*}
+}
+}
+
+\newcommand\overexample[2]{
+	 \only<#1>{
+\begin{textblock*}{\textwidth}(.35\textwidth,0.25\textheight)
+    \begin{beamercolorbox}[wd=.5\textwidth,center,sep=0.3cm]{block title example}
+	    #2
+    \end{beamercolorbox}
+\end{textblock*}
+}
+}
+
+\title{The (Casual) Causality Course \\ Introduction, some notations and fundamentals}
+\author{Gherardo Varando}
+\date{IPL \\ 02 May 2023}
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{The course}
+
+	\begin{itemize}
+		\item \textbf{When:} Tuesday and Thursday from 10:30 to 13:00 for the next 4 weeks
+		\item \textbf{Where:} In person IPL hall and (limited) virtual at zoom link
+			              \url{https://uv-es.zoom.us/j/94222318081?pwd=NkNGOForRDYrNEtuUHR2cGFmQWN6Zz09}
+		\item \textbf{Who:}  Gherardo Varando (gherardo.varando@uv.es) and 
+			Emiliano Díaz (emiliano.diaz@uv.es)
+		\item \textbf{Material} available on github \url{https://github.com/IPL-UV/casual_causality_course} if you are in the IPL you should have access to the private repo, otherwise write me an email with your github email and username and I will grant you access. 
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Content}
+	\begin{itemize}
+		\item[Week 1] \textbf{Introduction and notations}
+			\begin{itemize}
+				\item[Tue 02] Course introduction and first concepts 
+
+		%statistical vs causal model, BN/DAG, SEM, interventions and counterfactuals 
+
+	\item[Thur 04] Causal frameworks and framing causal problems 
+			\end{itemize}
+		\item[Week 2] \textbf{Causal Discovery} 
+			\begin{itemize}
+		            \item[Tue 09] Classical approaches 
+			    \item<2->[Wed 10?] \textcolor{red}{Practical session on causal discovery?}
+		            \item[Thur 11] Continuous optimization methods and NN parametrizations
+			\end{itemize}
+		\item[Week 3] \textbf{Causal Inference} 
+			\begin{itemize}
+		            \item[Tue 16] Causal effect estimation and possible biases  
+		            \item[Thur 18] Machine learning methods for causal effect estimation
+			\end{itemize}
+		\item[Week 4] \textbf{Applications} 
+			\begin{itemize}
+                           \item[Tue 23]  
+                           \item[Thur 25] 
+			\end{itemize}
+
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Statistical Models: a very short story}
+	\begin{itemize}
+		\item A mathematical model of the data generating process
+		\item A description of the probability of data  
+		\item A collection of statistical assumptions 
+		\item Allows us to compute probabilities of events 
+	\end{itemize}
+	\begin{block}{Definition}
+		Formally we can define a statistical model as a pair $(\mathcal{S}, \mathcal{P})$
+		where
+		\begin{itemize}
+			\item $\mathcal{S}$ is a sample space, 
+				formally $\mathcal{S} = (\Omega, \mathcal{F})$ with $\mathcal{F}$ a $\sigma$-algebra on $\Omega$ a set 
+			\item $\mathcal{P}$ is a collection of probability distributions on $\mathcal{S}$ 
+		\end{itemize}
+	\end{block}
+	Usually $\mathcal{P}$ is indexed by some finite-dimensional parameter $\theta$, in that case the model is said to be \textbf{parametric}, if instead the parameter is infinite dimensional (or there is no parameter) the model is said to be \textbf{non-parametric}.
+	\blfootnote{\citep{wasserman2004all}}
+\end{frame}
+
+\begin{frame}{Inference and statistical problems}
+	\begin{itemize}
+		\item<1-> modelling the data     
+			\vspace{0.3cm}
+		\item<2-> prediction or forecasting 
+			\vspace{0.3cm}
+		\item<3-> queries on parameter(s)  
+			\vspace{0.3cm}
+	        \item<4-> decision making  
+			\vspace{0.3cm}
+		\item<5-> model selection 
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Regression models}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+    Given data $(X_i, Y_i)$ 
+	\begin{itemize}
+		\item<1-> find best function that approximate $Y = f(X)$
+		\item<2->  define a statistical model for $P(Y|X)$, 
+			e.g. if consider an additive noise model $Y = f(X) + \varepsilon$ 
+		\item<3-> linear case  $Y = \sum \beta_i X_i + \beta_0 + \varepsilon$ 
+			we can do inference on the parameters $\beta_i$: confidence intervals, hypothesis testing
+		\item<4-> non-parametric approaches, for example kernel methods 
+		\item<4-> non-additive noise models, $Y = f(X, \varepsilon)$ 
+	\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+	\includegraphics{images/regression}
+		\end{column}
+		\end{columns}
+
+		\overexample{5}{How we can expand a regression model to obtain a full statistical model for the joint probability $P(X,Y)$?} 
+
+\end{frame}
+
+\begin{frame}{Bayesian Networks}
+
+	\begin{block}{Definition}
+              A Bayesian Network (BN) over random variables $X_1, X_2, \ldots, X_p$ 
+		is a pair $(G, P)$ where
+		\begin{itemize}
+			\item $G$ is a DAG over $p$ nodes (indexed as the r.vs)  
+			\item $P$ is a joint probability over $X_1, \ldots, X_p$ such that 
+				$P = \prod_{i=1}^p P(X_i| X_{pa(i)} )$
+		\end{itemize}
+	\end{block}
+
+	\begin{itemize}
+		\item BNs are an example of probabilistic graphical models 
+		\item  define statistical models 
+		\item<2-> for categorical r.v.s $P(X_i| X_{pa(i)})$ can be represented 
+			with conditional probability tables (CPTs)
+		\item<3-> for Gaussian r.v.s (and linear relationships), it is sufficient to specify a 
+			set of (linear) regressions for each node over its parents and the variance
+			of the residuals
+	\end{itemize}
+	\blfootnote{\citep{lauritzen1996graphical, koller2009probabilistic, 
+	maathuis2018handbook}}
+	\overexample{4}{Some people~\citep{wasserman2004all} think that the term Bayesian Network 
+	is misleading and poor terminology since BN do not have anything to do with Bayesian methods} 
+\end{frame}
+
+\begin{frame}
+
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{itemize}
+			\item<2-> 
+				\begin{enumerate}
+					\item parents $pa(i)$
+					\item children $ch(i)$
+					\item descendants $de(i)$
+					\item non-descendants $nde(i)$
+					\item ancestrors $an(i)$
+				\end{enumerate}
+			\item<3-> {v-structures, immoralities}
+			\item<4-> moral graph $G^m$ 
+
+			\item<5-> topological order   
+
+		\end{itemize}
+	\overexample{7}{can you write the factorization of the joint probability associated with this graph?}
+
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\include{dag1.tex}	
+	\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+ \begin{itemize}
+	 \item<1-> BNs are statistical models  
+	 \item<2-> statistical models are "collection of statistical assumptions" 
+         \item<3-> which are the assumptions associated with a given BN $(G, P)$?
+ \end{itemize}
+	\begin{block}{BN/DAG and conditional independences}
+		The following statements are equivalent:
+		\begin{itemize}
+			\item $(G, P)$ is a BN, that is $P$ factorize recursively wrt the DAG $G$ 
+			\item $P$ satisfies the \emph{local Markov property} wrt $G$, that is 
+				$X_i \indep X_{nd(i)} |  X_{pa(i)}$ 
+			\item $P$ satisfies the \emph{global Markov property} wrt $G$, that is
+				$X_A \indep X_B | X_D$  whenever $A$ and $B$ are d-separated 
+				by $D$ in DAG $G$ ($A$ and $B$ are separated by $D$ in $G_{an(A \cup B \cup D)}^m$)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+			\item<1-> d-separation, equivalent to separation in the moral graph of 
+				the ancestors of involved vertices 
+			\item<2-> equivalently $i$ and $j$ are d-separated by $D$ if 
+				there exists no undirected path $u$
+					between $i$ and $j$ such that 
+					\begin{enumerate}
+						\item every collider in $u$ has 
+							a descendants in $D$ 
+						\item no other vertex on $u$ is in $D$
+					\end{enumerate}
+			\end{itemize}
+		\overexample{3}{Can you list some d-separations in the graph? some are easy ...}
+		\end{column}
+	\begin{column}{0.5\textwidth}
+		\include{dag1.tex}	
+	\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Sampling from a BN}
+
+How can we obtain samples from a probability distribution 
+associated with a BN? 
+
+	\onslide<2-> \textbf{we can use the topological order to sample efficiently}
+	\begin{itemize}
+		\item pick a topological order of the nodes in $G$ 
+		\item to generate each sample:
+	\begin{enumerate}
+		\item start by sampling $x_i$ from $P(X_i)$ for each nodes $i$ without parents (there must be at least one) 
+		\item follow the topological order and sample from $P(X_i| X_{pa(i)} = x_{pa(i)})$ 
+			(since we follow the topological order $x_{pa(i)}$ is already sampled) 
+	\end{enumerate}
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Other graphical models}
+	\begin{itemize}
+		\item Markov networks, Markov random fields or undirected graphical models (e.g. Ising models in statistical physics) \citep{koller2009probabilistic, lauritzen1996graphical} 
+		\item Model based on event trees such as staged event trees or chain event graphs
+			\citep{leonelli23a}
+		\item Chain graphs 
+		\item restricted Boltzman machines 
+	\end{itemize}
+	\includegraphics[scale=0.08]{images/undirected}
+	\includegraphics[scale=0.3]{images/tree}
+	\includegraphics[scale=0.1]{images/restricted}
+\end{frame}
+
+\begin{frame}{Causality?} 
+	\begin{itemize}
+		\item<1-> statistical models (and ML models) represents association in the data 
+		\item<2-> stat/ML models are not mechanistic/physical/causal models of the data 
+		\item<3-> most of the time (in sciences) we are actually interested in causal questions
+		\item<4-> but what is \emph{causality} ? 
+	\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{(Probabilistic) Causal Models}
+
+\end{frame}
+
+
+
+\begin{frame}
+\bibliography{biblio}
+\end{frame}
+
+\end{document}
+
+
