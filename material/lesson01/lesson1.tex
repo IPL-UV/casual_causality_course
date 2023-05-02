@@ -1,5 +1,6 @@
 \documentclass{beamer}
 
+\usepackage{babel}
 \usepackage{tikz}
 %\usetheme{boxes}
 \usepackage[utf8]{inputenc}
@@ -56,6 +57,17 @@
 	 \only<#1>{
 \begin{textblock*}{\textwidth}(.35\textwidth,0.25\textheight)
     \begin{beamercolorbox}[wd=.5\textwidth,center,sep=0.3cm]{block title example}
+	    #2
+    \end{beamercolorbox}
+\end{textblock*}
+}
+}
+
+
+\newcommand\overeblock[2]{
+	 \only<#1>{
+\begin{textblock*}{\textwidth}(.35\textwidth,0.25\textheight)
+    \begin{beamercolorbox}[wd=.5\textwidth,center,sep=0.3cm]{block title}
 	    #2
     \end{beamercolorbox}
 \end{textblock*}
@@ -147,6 +159,12 @@
 			\vspace{0.3cm}
 		\item<5-> model selection 
 	\end{itemize}
+	\onslide<6->{
+		\begin{example}{}
+                       image classification, weather forecasting, stock price prediction, 
+		       crop yield prediction,  crop detection, cloud detection, gap-filling
+		\end{example}
+	}
 \end{frame}
 
 
@@ -196,8 +214,15 @@
 	\end{itemize}
 	\blfootnote{\citep{lauritzen1996graphical, koller2009probabilistic, 
 	maathuis2018handbook}}
-	\overexample{4}{Some people~\citep{wasserman2004all} think that the term Bayesian Network 
+	\overeblock{4}{\citep{wasserman2004all} and others think that the term Bayesian Network 
 	is misleading and poor terminology since BN do not have anything to do with Bayesian methods} 
+\end{frame}
+
+\begin{frame}
+	\includegraphics{images/bayes}
+	\overexample{2}{Thomas Bayes (c. 1701 – 7 April 1761) was an English statistician, 
+	philosopher and Presbyterian minister who is known for formulating a 
+	specific case of the theorem that bears his name: Bayes' theorem.}
 \end{frame}
 
 \begin{frame}
@@ -235,7 +260,7 @@
 	 \item<2-> statistical models are "collection of statistical assumptions" 
          \item<3-> which are the assumptions associated with a given BN $(G, P)$?
  \end{itemize}
-	\begin{block}{BN/DAG and conditional independences}
+	\onslide<4->\begin{block}{BN/DAG and conditional independences}
 		The following statements are equivalent:
 		\begin{itemize}
 			\item $(G, P)$ is a BN, that is $P$ factorize recursively wrt the DAG $G$ 
@@ -246,6 +271,7 @@
 				by $D$ in DAG $G$ ($A$ and $B$ are separated by $D$ in $G_{an(A \cup B \cup D)}^m$)
 		\end{itemize}
 	\end{block}
+	\overeblock{5}{\textbf{ takeaway \\ BN/DAG are graphical ways to encode conditional independence statements}} 
 \end{frame}
 
 \begin{frame}
@@ -307,21 +333,113 @@ associated with a BN?
 	\begin{itemize}
 		\item<1-> statistical models (and ML models) represents association in the data 
 		\item<2-> stat/ML models are not mechanistic/physical/causal models of the data 
-		\item<3-> most of the time (in sciences) we are actually interested in causal questions
+		\item<3-> sometime in the sciences, but also in healthcare, econometrics, \ldots
+			we are actually interested in causal questions
 		\item<4-> but what is \emph{causality} ? 
 	\end{itemize}
 
 \end{frame}
 
-
-
-\begin{frame}{(Probabilistic) Causal Models}
-
+\begin{frame}
+	\includegraphics{images/wright}
+	\overexample{2}{Sewall Green Wright FRS(For) Honorary FRSE (December 21, 1889 – March 3, 1988) 
+	was an American geneticist known for his influential work on evolutionary 
+	theory and also for his work on path analysis.
+        Path analysis is considered by Judea Pearl to be a direct ancestor
+	to the techniques of Causal inference.
+	}
 \end{frame}
 
 
 
+\begin{frame}{(Probabilistic) Causal Models}
+	\begin{itemize}
+		\item<1-> we consider a probabilistic definition for causality 
+		\item<2-> \emph{Roughly speaking, the statement "X causes Y" means that changing the
+			value of X will change the distribution of Y} \citep{wasserman2004all} 
+		\item<3-> Causal models contain more information than statistical models  
+			\citep{peters2017elements}
+	\end{itemize}
+	\includegraphics[scale=0.3]{images/causal-diagram}
+\end{frame}
+
+\begin{frame}{\emph{correlation does not imply causation}}
+	\only<1-1>{\includegraphics[scale=0.2]{images/dinos}}
+	\only<2->{\begin{block}{Reichenbach’s common cause principle\citep{peters2017elements}}
+If two random variables $X$ and $Y$ are statistically dependent ($X \not\indep Y$ ), 
+		then there exists a third variable
+$Z$ that causally influences both. 
+		(As a special case, $Z$ may coincide with either $X$ or $Y$.) 
+		Furthermore, this variable $Z$ screens $X$ and $Y$ 
+		from each other in the sense that given $Z$, 
+		they become independent, $X \indep  Y | Z$.
+	\end{block}
+	In practice other reasons could be:
+	\begin{itemize}
+		\item<3-> \textbf{time dependence} and thus $X$ and $Y$ appear correlated 
+		\item<5-> conditioned on others (\textbf{selection bias}) 
+		\item<7-> statistical and finite sample problems 
+	\end{itemize}
+	\overexample{4}{\includegraphics[scale=0.3]{images/corrCause2}}
+	\overexample{6}{\include{vstruct.tex}}
+	}
+\end{frame}
+
 \begin{frame}
+	\center \includegraphics[scale=0.5]{images/correlation}
+	\footnote{\url{https://xkcd.com/552}}
+\end{frame}
+
+\begin{frame}{Causal models desiderata}
+	\begin{itemize}
+		\item Represent data, similar to a statistical model 
+		\item Model what happen when changes/experiment/interventions  
+		\item Reason on and explore the causal relationships 
+		\item Represent causal realtionships 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Causal regression models}
+      \begin{itemize}
+	      \item given a regression model $Y = f(X, \varepsilon)$ 
+		      we could interpret this as a causal model 
+	      \item in the sense that we immagine the physical/true generating process 
+		      to be modeled by this equation 
+	      \item<2-> If we make \emph{experiments} by changing the value of $X$ we know that 
+		      the associated value for $Y$ is generated accordingly to $f(X, \varepsilon)$ 
+      \end{itemize}
+\end{frame}
+
+\begin{frame}{Structural Causal Models}
+	\begin{block}{Definition \citep{peters2017elements}}
+ A SCM over variables $X_1, \ldots, X_p$ with noise variables $\varepsilon_1, \ldots, \varepsilon_p$ is 
+	 a collection of \textbf{structural assignments}: 
+	   \[ X_i =  f_i(X_{pa(i)}, \varepsilon_i) \]
+	   where $\varepsilon_i$ are assumed jointly independent and $f_i$ are fixed deterministic functions.  
+	 \end{block}
+	 \begin{itemize}
+		 \item $X_{pa(i)}$ are called the parents or the \textbf{direct causes} of $X_i$
+		 \item we say $X_i$ is a direct effect of its direct causes 
+		 \item we assume the associated graph $G$ to be a DAG 
+		 \item<2-> A SCM defines a unique distribution $P$ over the variables $X_1, \ldots, X_p$ 
+		 \item<3-> $(G, P)$ is a Bayesian network 
+	 \end{itemize}
+	 \overexample{4}{From a mathematical point of view there is no difference between a BN/DAG model and a SCM. 
+			 It is the interpretation that is different, in a SCM we assume that the \emph{regression models} 
+			 defined for each variables are causal}
+\end{frame}
+
+
+\begin{frame}{Interventions in SCM}
+	\begin{itemize}
+		\item given a SCM we define an experiment, or intervention when we \textbf{replace one or several of the structural assignments} to obtain a new SCM
+		\item<2-> the interventional distribution under this change is the new entailed probability distribution defined by the new SCM
+		\item<3-> e.g if changing one of the assignment (for $X_k$) we can write $P^{do(X_k = \tilde{f}_k(X_{\tilde{pa}(k)}, \tilde{\varepsilon}))}$ the new interventional distribution 
+		\item<4-> the do-operator notation is due to Pearl 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
 \bibliography{biblio}
 \end{frame}
 
