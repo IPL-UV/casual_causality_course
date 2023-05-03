@@ -7,7 +7,7 @@ A <- rnorm(n)
 B <- 5*A + rnorm(n, sd = 1)
 
 plot(A, B)
-
+hist(A)
 ### P(A | B) ??
 summary(lm(A ~ B))
 ### P(A | B) = N(mean = 0.2 * B, sd = 0.2)
@@ -21,5 +21,5 @@ for (i in 1:n){
   A1[i] <- rnorm(1)
   B1[i] <- 1
   }
-plot(A, B)
-hist(A)
+plot(A1, B1)
+hist(A1)
