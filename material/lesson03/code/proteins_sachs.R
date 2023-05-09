@@ -63,3 +63,6 @@ plot(pc2, main = "pcalg::pc result")
 score <- new("GaussL0penObsScore",  all)
 ges.fit <- ges(score)
 plot(ges.fit$essgraph, main = "pcalg::ges result")
+
+
+
