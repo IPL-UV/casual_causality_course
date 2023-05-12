@@ -17,6 +17,6 @@ internal course on causal methods at ISP.
 |week 2|Tue 09/05  | 10:30  13:00 |  Causal discovery                |GV  |
 |      |Thur 11/05 | 10:30 13:00  |  Discovery with cont. opt.       |ED  | 
 |week 3|Tue 16/05  | 10:30  13:00 |  Causal effect est. and biases   |GV  |
-|      |Thur 18/05 | 10:30 13:00  |  ML for causal effect estimation |ED  | 
-|week 4|Tue 23/05  | 10:30  13:00 |  Applications                    |GV  |
-|      |Thur 25/05 | 10:30 13:00  |                                  |ED  | 
+|      |Thur 18/05 | 10:30 13:00  |  ML for causal effect estimation |GV  | 
+|week 4|Tue 23/05  | 10:30  13:00 |  Applications                    |ED  |
+|      |Thur 25/05 | 10:30 13:00  |                                  |GV  | 
