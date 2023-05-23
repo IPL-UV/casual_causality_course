@@ -34,10 +34,10 @@ pvals <- data.frame(lapply(ALLMTHDS, function(MTH){
 pvals
 
 
-plot(scale(PCA$x[,6]), type = "l")
+plot(scale(PCA$x[,4]), type = "l")
 lines(Y, col = "red")
 
-plot(scale(VM$x[,6]), type = "l")
+plot(scale(VM$x[,3]), type = "l")
 lines(Y, col = "red")
 
 plot(scale(GPCA$x[,1]), type = "l")

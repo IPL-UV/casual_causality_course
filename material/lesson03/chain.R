@@ -1,7 +1,8 @@
 library("pcalg")
 library("bnlearn")
 library("Rgraphviz")
-n <- 1000
+
+n <- 100
 X <- rnorm(n)
 Y <- 0.5*X + rnorm(n, sd = 0.1)
 Z <- -0.2*Y + 1 + rnorm(n, sd = 0.1)
@@ -9,6 +10,7 @@ Z <- -0.2*Y + 1 + rnorm(n, sd = 0.1)
 ### true graph is X -> Y -> Z
 
 data <- data.frame(X = X, Y = Y, Z = Z)
+plot(data)
 
 pc_res <- pc.stable(data)
 plot(pc_res, main = "pc.stable")
@@ -20,6 +22,8 @@ plot(tabu_res1, main = "tabu")
 ## but
 tabu_res2 <- tabu(data[,3:1])
 plot(tabu_res2, main = "tabu")
+
+plot(cpdag(tabu_res2))
 
 ### lingam 
 res1 <- lingam(as.matrix(data), verbose = TRUE)# details on LINGAM

@@ -29,6 +29,8 @@ library("bnlearn")
 #### bnlearn pc.stable
 res_pcstable <- pc.stable(X, alpha = 0.01, debug = TRUE)
 graphviz.plot(res_pcstable, main = "result from bnlearn::pcstable")
+bnlearn::ci.test(X$V1, X$V2, X$V3)
+
 #### pcalg::pc
 pc.fit <- pc(suffStat = list(C = cor(X), n = nrow(X)), 
                     indepTest = gaussCItest,
@@ -39,6 +41,7 @@ plot(pc.fit, main = "result from pcalg::pc")
 #### bnlearn::tabu 
 res_tabu <- tabu(X)
 plot(res_tabu, main = "result from bnlearn::tabu")
+
 
 #### pcalg::ges 
 score <- new("GaussL0penObsScore",  X)
@@ -57,8 +60,8 @@ DD <- data.frame(observation = 1:N)
 for (i in 1:n) {
   DD[[paste("X", i, sep = "")]] <- sample(
     c(-1, +1),
-    #prob = runif(2),
-    prob = c(0.5, 0.5),
+    prob = runif(2),
+    #prob = c(0.5, 0.5),
     size = N,
     replace = TRUE
   )
@@ -80,6 +83,7 @@ plot(pc.stable(DD, debug = TRUE, alpha = 0.05))
 
 ### bnlearn hc
 plot(hc(DD))
+plot(tabu(DD))
 
 ### pcalg 
 DD1 <- (data.frame(t(apply(DD,1, function(x) as.numeric(x)))) + 1) / 2
