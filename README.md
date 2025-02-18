@@ -1,7 +1,8 @@
-## (Casual) Causality Course
+## (Casual) Causality Course, 2025 edition 
 
 - Gherardo Varando <gherardo.varando@uv.es> 
 - Emiliano Diaz <emiliano.diaz@uv.es> 
+- Vassilis Sitokonstantinou <vasileios.sitokonstantinou@uv.es>
 
 This repo contains the material for the 
 internal course on causal methods at ISP. 
@@ -12,11 +13,9 @@ internal course on causal methods at ISP.
 
 |      |           |              |                                  |    |
 |------|-----------|--------------|----------------------------------|----|
-|week 1|Tue 02/05  | 10:30  13:00 |  Introduction and first concepts |GV  |
-|      |Thur 04/05 | 10:30 13:00  |  Causal frameworks and problems  |GV  | 
-|week 2|Tue 09/05  | 10:30  13:00 |  Causal discovery                |GV  |
-|      |Thur 11/05 | 10:30 13:00  |  Discovery with cont. opt.       |ED  | 
-|week 3|Tue 16/05  | 10:30  13:00 |  Causal effect est. and biases   |GV  |
-|      |Thur 18/05 | 10:30 13:00  |  ML for causal effect estimation |GV  | 
-|week 4|Tue 23/05  | 10:30  13:00 |  Applications                    |ED  |
-|      |Thur 25/05 | 10:30 13:00  |                                  |GV  | 
+|week 1|Tue 25/03  | 09:30  13:30 |  Introduction and first concepts |GV  |
+|      |Thur 27/03 | 09:30  13:30 |  Causal frameworks and problems  |GV  | 
+|week 2|Tue 01/04  | 09:30  13:30 |  Causal discovery                |ED  |
+|      |Thur 03/04 | 09:30  13:30 |  Causal discovery                |ED  | 
+|week 3| 07-11/04  | 09:00  13:00 |  Focus Week                      |VS  |
+|      | all week  | 14:30  17:00 |  group work                      |VS  | 
