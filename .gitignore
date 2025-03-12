@@ -1,3 +1,6 @@
+## ignore all pdf for sessions 
+session*.pdf
+
 envcausal
 
 Synthetic4BookChap.csv
