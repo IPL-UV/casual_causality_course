@@ -14,7 +14,7 @@ internal course on causal methods at ISP.
 |      |           |              |                                     |    |
 |------|-----------|--------------|-------------------------------------|----|
 |week 1|Tue 25/03  | 09:30  13:30 |  Introduction and causal frameworks |GV  |
-|      |Thur 27/03 | 09:30  13:30 |  Causal frameworks and problems     |GV  | 
+|      |Thur 27/03 | 09:30  13:30 |  Causal inference;  robustness      |GV  | 
 |week 2|Tue 01/04  | 09:30  13:30 |  Causal discovery                   |ED  |
 |      |Thur 03/04 | 09:30  13:30 |  Causal discovery                   |ED  | 
 |week 3| 07-11/04  | 09:00  13:00 |  Focus Week                         |VS  |
