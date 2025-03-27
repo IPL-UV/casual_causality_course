@@ -53,7 +53,7 @@ model$prob$outcome$`low-wet`["burned"] <- 0.005
 model$prob$outcome$`low-wet`["not-burned"] <- 0.995
 
 model$prob$outcome$`low-normal`["burned"] <- 0.01
-model$prob$outcome$`low-normal`["not-burned"] <- 0.9
+model$prob$outcome$`low-normal`["not-burned"] <- 0.99
 
 model$prob$outcome$`low-high`["burned"] <- 0.05
 model$prob$outcome$`low-high`["not-burned"] <- 0.95
@@ -73,17 +73,18 @@ model$prob$outcome$`high-untreated`["not-burned"] <- 0.8
 model$prob$outcome$`high-untreated-wet`["burned"] <- 0.1
 model$prob$outcome$`high-untreated-wet`["not-burned"] <- 0.9
 
-
+plot(model)
 data <- sample_from(model, size = 10000, seed = 2025)
 
 dir.create("data", showWarnings = FALSE)
 write.csv(data, file = "data/fire_risk_randomized.csv")
 
-fitted <- full(data, order = c("risk", "treatment", "outcome"))
-potential_outcomes(fitted, "outcome", "treatment", method = "randomiz")
 
-fitted$ctables$outcome / rowSums(fitted$ctables$outcome)
+potential_outcomes(model, outcome =  "outcome", 
+                          treatment = "treatment")
 
-potential_outcomes(model, "outcome", "treatment", method = "randomiz")
+### fit a stagedtrees model to data
+fitted <- full(data, order = c("risk", "treatment", "outcome")) |> stages_bhc() 
+potential_outcomes(fitted, "outcome", "treatment")
 
-confint(fitted, "outcome")
+
