@@ -7,18 +7,18 @@ def get_adjacency_matrix(arcs, edges, nodes):
     # initaialize the adjacency matrix with zeros in a pandas dataframe with columns and rows as the nodes
     adjacency_matrix = pd.DataFrame(0, index=nodes, columns=nodes)
     # fill the adjacency matrix with ones for the edges
-    for edge in edges:
-        adjacency_matrix.loc[edge[0], edge[1]] = 1
-    # fill the adjacency matrix with ones for the arcs
     for arc in arcs:
         adjacency_matrix.loc[arc[0], arc[1]] = 1
     # fill the adjacency matrix with ones for the arcs
-    for arc in arcs:
-        adjacency_matrix.loc[arc[1], arc[0]] = 1
+    for edge in edges:
+        adjacency_matrix.loc[edge[0], edge[1]] = 1
+    # fill the adjacency matrix with ones for the arcs
+    for edge in edges:
+        adjacency_matrix.loc[edge[1], edge[0]] = 1
     return adjacency_matrix
 
 
-def draw_cpdag(arcs, edges, nodes):
+def draw_cpdag(arcs, edges, nodes, node_size=700, arrowsize=50):
 
     # Create a DiGraph
     G = nx.DiGraph()
@@ -30,22 +30,25 @@ def draw_cpdag(arcs, edges, nodes):
     G.add_edges_from(edges)
 
     # Add undirected edges (represent as bidirectional with a special attribute)
-    for u, v in arcs:
+    for u, v in edges:
         G.add_edge(u, v, undirected=True)
         G.add_edge(v, u, undirected=True)
+
+    for u, v in arcs:
+        G.add_edge(u, v, undirected=False)
 
     # Positions for consistent layout
     pos = nx.spring_layout(G)
 
     # Draw nodes
-    nx.draw_networkx_nodes(G, pos, node_size=700)
+    nx.draw_networkx_nodes(G, pos, node_size=node_size)
 
     # Draw labels
     nx.draw_networkx_labels(G, pos)
 
     # Draw directed edges (excluding "undirected" ones)
     directed_draw_edges = [
-        (u, v) for (u, v) in G.edges() if not G[u][v].get("undirected", False)
+        (u, v) for (u, v) in G.edges() if not G[u][v].get("undirected", True)
     ]
     nx.draw_networkx_edges(
         G, pos,
@@ -54,7 +57,7 @@ def draw_cpdag(arcs, edges, nodes):
         arrowstyle='-|>',
         connectionstyle='arc3,rad=0.1',
         edge_color='black',
-        arrowsize=50
+        arrowsize=arrowsize
     )
 
     # Draw undirected edges (as bidirectional lines with no arrows)
