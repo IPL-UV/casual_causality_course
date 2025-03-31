@@ -4,6 +4,7 @@ session*.pdf
 envcausal
 
 Synthetic4BookChap.csv
+data/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
