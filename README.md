@@ -19,3 +19,8 @@ internal course on causal methods at ISP.
 |      |Thur 03/04 | 09:30  13:30 |  Causal discovery                   |ED  | 
 |week 3| 07-11/04  | 09:00  13:00 |  Causality and Invariance           |VS  |
 |      | all week  | 14:30  17:00 |  group work                         |VS  | 
+
+
+### License
+
+Copyright (c) 2023-2025 Gherardo Varando, Emiliano Diaz, Vassilis Sitokonstantinou. The course material is licensed under a [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
